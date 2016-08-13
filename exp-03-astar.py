@@ -4,7 +4,6 @@ class cell():
         self.x = x
         self.y = y
         self.g = g
-        self.h = 0
         self.f = 0
         self.parent = parent
 
