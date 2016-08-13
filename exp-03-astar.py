@@ -7,23 +7,23 @@ class cell():
         self.f = 0
         self.parent = parent
 
-def neighbors(node):
+def neighbors(node, rows, columns):
     neighbors_list = []
-    if ((node.x + 1) != 5) and ((node.y + 1) != 5):
+    if ((node.x + 1) < rows) and ((node.y + 1) < columns):
         neighbors_list.append(cell(node.x + 1, node.y + 1, node.g + 1.414, node))
-    if ((node.x - 1) != -1) and ((node.y - 1) != -1):
+    if ((node.x - 1) > -1) and ((node.y - 1) > -1):
         neighbors_list.append(cell(node.x - 1, node.y - 1, node.g + 1.414, node))
-    if ((node.x + 1) != 5) and ((node.y - 1) != -1):
+    if ((node.x + 1) < rows) and ((node.y - 1) > -1):
         neighbors_list.append(cell(node.x + 1, node.y - 1, node.g + 1.414, node))
-    if ((node.x - 1) != -1) and ((node.y + 1) != 5):
+    if ((node.x - 1) < -1) and ((node.y + 1) > columns):
         neighbors_list.append(cell(node.x - 1, node.y + 1, node.g + 1.414, node))
-    if (node.x + 1) != 5:
+    if (node.x + 1) < rows:
         neighbors_list.append(cell(node.x + 1, node.y, node.g + 1, node))
-    if (node.x - 1) != -1:
+    if (node.x - 1) > -1:
         neighbors_list.append(cell(node.x - 1, node.y, node.g + 1, node))
-    if (node.y + 1) != 5:
+    if (node.y + 1) < columns:
         neighbors_list.append(cell(node.x, node.y + 1, node.g + 1, node))
-    if (node.y - 1) != -1:
+    if (node.y - 1) > -1:
         neighbors_list.append(cell(node.x, node.y - 1, node.g + 1, node))
     return neighbors_list
 
@@ -43,7 +43,7 @@ def construct_path(node, board):
         board[node.x][node.y] = 1
     return print_board(board)
 
-def astar(start, goal, board):
+def astar(start, goal, board, rows, columns):
     open_list = [start]
     closed_list = []
     start.f = start.g + heuristic(start, goal)
@@ -52,7 +52,7 @@ def astar(start, goal, board):
         if (node.x == goal.x) and (node.y == goal.y):
             return construct_path(node, board)
         closed_list.append(open_list.pop(get_index(node, open_list)))
-        for neighbor in neighbors(node):
+        for neighbor in neighbors(node, rows, columns):
             if get_index(neighbor, closed_list) == -1:
                 neighbor.f = neighbor.g + heuristic(neighbor, goal)
                 index = get_index(neighbor, open_list)
@@ -62,7 +62,7 @@ def astar(start, goal, board):
                     if neighbor.g < open_list[index].g:
                         open_list[index].g = neighbor.g
                         open_list[index].parent = neighbor.parent
-    return False
+    print('Not Possible')
 
 def get_index(node, nodes):
     for i in nodes:
@@ -76,30 +76,42 @@ def print_board(board):
             print(str(j) + ' ',end='')
         print('')
 
-start = cell(0, 0, 0, '')
-goal = cell(3, 4, 0, '')
-board = [[0, 0, 0, 0, 0],[0, 0, 0, 0, 0],[0, 0, 0, 0, 0],[0, 0, 0, 0, 0],[0, 0, 0, 0, 0]]
+board = list()
+rows = int(input('Enter rows: '))
+columns = int(input('Enter columns: '))
+for i in range(rows):
+    board.append(list())
+    for j in range(columns):
+        board[i].append(0)
 print('The Board: ')
 print_board(board)
+start = cell(int(input('\nEnter start x: ')) - 1, int(input('Enter start y: ')) - 1, 0, '')
+goal = cell(int(input('Enter goal x: ')) - 1, int(input('Enter goal y: ')) - 1, 0, '')
 print('\nSolution: ')
-astar(start, goal, board)
+astar(start, goal, board, rows, columns)
 
 '''
 ##############
 #   OUTPUT   #
 ##############
 
+Enter rows: 4
+Enter columns: 6
 The Board:
-0 0 0 0 0
-0 0 0 0 0
-0 0 0 0 0
-0 0 0 0 0
-0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+
+Enter start x: 1
+Enter start y: 1
+Enter goal x: 4
+Enter goal y: 6
 
 Solution:
-1 0 0 0 0
-0 1 1 0 0
-0 0 0 1 0
-0 0 0 0 1
-0 0 0 0 0
+1 0 0 0 0 0
+0 1 1 0 0 0
+0 0 0 1 0 0
+0 0 0 0 1 1
+
 '''

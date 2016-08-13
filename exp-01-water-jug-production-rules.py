@@ -3,10 +3,11 @@ class state:
         self.x = x
         self.y = y
 
+
 start = state(0, 0)
-goal = state(2, 0)
-cap_jug1 = 5
-cap_jug2 = 4
+cap_jug1 = int(input('Enter jug 1 capacity: '))
+cap_jug2 = int(input('Enter jug 2 capacity: '))
+goal = state(int(input('Enter goal capacity: ')), 0)
 
 def fill(cur_state):
     print('(' + str(cur_state.x) + ',' + str(cur_state.y) + ')-->', end='')
@@ -28,5 +29,9 @@ fill(start)
 #   OUTPUT   #
 ##############
 
-(0,0)-->(5,0)-->(1,4)-->(1,0)-->(0,1)-->(5,1)-->(2,4)-->(2,0)-->GOAL
+Enter jug 1 capacity: 5
+Enter jug 2 capacity: 3
+Enter goal capacity: 2
+(0,0)-->(5,0)-->(2,3)-->(2,0)-->GOAL
+
 '''

@@ -18,7 +18,7 @@ def add_unique(node):
         node_list.append(node)
         stack.insert(0, node)
 
-def bfs(start, goal, cap_jug1, cap_jug2):
+def dfs(start, goal, cap_jug1, cap_jug2):
     global stack
     stack = [start]
     while len(stack) > 0:
@@ -53,14 +53,21 @@ def display_path(path):
         print('(' + str(i.x) + ',' + str(i.y) + ')-->', end='')
     print('GOAL')
 
+cap_jug1 = int(input('Enter jug 1 capacity: '))
+cap_jug2 = int(input('Enter jug 2 capacity: '))
+x = int(input('Enter goal capacity: '))
 start = state(0, 0, '')
-goal = state(2, 0, '')
-bfs(start, goal, 5, 4)
+goal = state(x, 0, '')
+dfs(start, goal, cap_jug1, cap_jug2)
 
 '''
 ##############
 #   OUTPUT   #
 ##############
 
+Enter jug 1 capacity: 5
+Enter jug 2 capacity: 4
+Enter goal capacity: 2
 (0,0)-->(0,4)-->(4,0)-->(4,4)-->(5,3)-->(0,3)-->(3,0)-->(3,4)-->(5,2)-->(0,2)-->(2,0)-->GOAL
+
 '''

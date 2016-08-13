@@ -53,14 +53,21 @@ def display_path(path):
         print('(' + str(i.x) + ',' + str(i.y) + ')-->', end='')
     print('GOAL')
 
+cap_jug1 = int(input('Enter jug 1 capacity: '))
+cap_jug2 = int(input('Enter jug 2 capacity: '))
+x = int(input('Enter goal capacity: '))
 start = state(0, 0, '')
-goal = state(2, 0, '')
-bfs(start, goal, 5, 4)
+goal = state(x, 0, '')
+bfs(start, goal, cap_jug1, cap_jug2)
 
 '''
 ##############
 #   OUTPUT   #
 ##############
 
+Enter jug 1 capacity: 5
+Enter jug 2 capacity: 4
+Enter goal capacity: 2
 (0,0)-->(5,0)-->(1,4)-->(1,0)-->(0,1)-->(5,1)-->(2,4)-->(2,0)-->GOAL
+
 '''
