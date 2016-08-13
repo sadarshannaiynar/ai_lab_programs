@@ -77,9 +77,29 @@ def print_board(board):
         print('')
 
 start = cell(0, 0, 0, '')
-goal = cell(4, 4, 0, '')
+goal = cell(3, 4, 0, '')
 board = [[0, 0, 0, 0, 0],[0, 0, 0, 0, 0],[0, 0, 0, 0, 0],[0, 0, 0, 0, 0],[0, 0, 0, 0, 0]]
 print('The Board: ')
 print_board(board)
 print('\nSolution: ')
 astar(start, goal, board)
+
+'''
+##############
+#   OUTPUT   #
+##############
+
+The Board:
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+
+Solution:
+1 0 0 0 0
+0 1 1 0 0
+0 0 0 1 0
+0 0 0 0 1
+0 0 0 0 0
+'''
