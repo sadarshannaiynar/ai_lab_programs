@@ -38,9 +38,14 @@ def get_cheapest(nodes):
 
 def construct_path(node, board):
     board[node.x][node.y] = 1
+    path = [node]
     while node.parent != '':
         node = node.parent
+        path.insert(0, node)
         board[node.x][node.y] = 1
+    for i in path:
+        print('(' + str(i.x + 1) + ',' + str(i.y + 1) + ')-->', end='')
+    print('GOAL\n')
     return print_board(board)
 
 def astar(start, goal, board, rows, columns):
@@ -109,6 +114,8 @@ Enter goal x: 4
 Enter goal y: 6
 
 Solution:
+(1,1)-->(2,2)-->(2,3)-->(3,4)-->(4,5)-->(4,6)-->GOAL
+
 1 0 0 0 0 0
 0 1 1 0 0 0
 0 0 0 1 0 0
