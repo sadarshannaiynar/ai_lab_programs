@@ -15,7 +15,7 @@ def neighbors(node, rows, columns):
         neighbors_list.append(cell(node.x - 1, node.y - 1, node.g + 1.414, node))
     if ((node.x + 1) < rows) and ((node.y - 1) > -1):
         neighbors_list.append(cell(node.x + 1, node.y - 1, node.g + 1.414, node))
-    if ((node.x - 1) < -1) and ((node.y + 1) > columns):
+    if ((node.x - 1) > -1) and ((node.y + 1) > columns):
         neighbors_list.append(cell(node.x - 1, node.y + 1, node.g + 1.414, node))
     if (node.x + 1) < rows:
         neighbors_list.append(cell(node.x + 1, node.y, node.g + 1, node))
